@@ -1,0 +1,38 @@
+﻿<Application
+    x:Class="HelpCentreUwp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HelpCentreUwp">
+    <Application.Resources>
+        <SolidColorBrush x:Name="ControlBorderBrush" Color="{ThemeResource SystemColorHighlightTextColor}" Opacity="0.5"/>
+        <RevealBackgroundBrush x:Name="RBgBrush1" Color="{ThemeResource SystemRevealAltLowColor}" />
+        <RevealBorderBrush x:Name="RBrdrBrush1" Color="{ThemeResource SystemColorHighlightTextColor}" FallbackColor="#CCFFFFFF" />
+        <ControlTemplate x:Key="IpDisplayTemplate" TargetType="ContentControl">
+            <Border BorderBrush="{StaticResource RBrdrBrush1}" Background="{StaticResource RBgBrush1}" BorderThickness="{TemplateBinding BorderThickness}" Margin="1" x:Name="Root">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Target="Root.Background" Value="Red"/>
+                            </VisualState.Setters>
+                            <Storyboard>
+                                <PointerUpThemeAnimation Storyboard.TargetName="Root" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <!--Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/-->
+                                <Setter Target="Root.Background" Value="Blue"/>
+                                <Setter Target="Root.BorderBrush" Value="Transparent"/>
+                            </VisualState.Setters>
+                            <Storyboard>
+                                <PointerUpThemeAnimation Storyboard.TargetName="Root" />
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ContentPresenter/>
+            </Border>
+        </ControlTemplate>
+    </Application.Resources>
+</Application>

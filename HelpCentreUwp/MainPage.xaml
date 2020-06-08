@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="HelpCentreUwp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HelpCentreUwp"
+    xmlns:routine="using:HelpCentreUwp.Routine"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <AcrylicBrush x:Name="BackgroundBrushNo1" FallbackColor="#FF272727" TintOpacity="0.85" TintTransitionDuration="00:00:00.8" TintColor="#C0272727" TintLuminosityOpacity="0.75" BackgroundSource="HostBackdrop"></AcrylicBrush>
+    </Page.Resources>
+    <Grid Background="{StaticResource BackgroundBrushNo1}">
+        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Top" Template="{StaticResource IpDisplayTemplate}" BorderThickness="2">
+            <TextBlock x:Name="textBlock" Text="External IP" Tapped="CopyIpTap" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="{ThemeResource ButtonPadding}" Foreground="White" />
+        </ContentControl>
+    </Grid>
+</Page>
