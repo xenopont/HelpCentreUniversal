@@ -4,35 +4,72 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HelpCentreUwp">
     <Application.Resources>
-        <SolidColorBrush x:Name="ControlBorderBrush" Color="{ThemeResource SystemColorHighlightTextColor}" Opacity="0.5"/>
-        <RevealBackgroundBrush x:Name="RBgBrush1" Color="{ThemeResource SystemRevealAltLowColor}" />
-        <RevealBorderBrush x:Name="RBrdrBrush1" Color="{ThemeResource SystemColorHighlightTextColor}" FallbackColor="#CCFFFFFF" />
-        <ControlTemplate x:Key="IpDisplayTemplate" TargetType="ContentControl">
-            <Border BorderBrush="{StaticResource RBrdrBrush1}" Background="{StaticResource RBgBrush1}" BorderThickness="{TemplateBinding BorderThickness}" Margin="1" x:Name="Root">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup>
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <Setter Target="Root.Background" Value="Red"/>
-                            </VisualState.Setters>
-                            <Storyboard>
-                                <PointerUpThemeAnimation Storyboard.TargetName="Root" />
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="PointerOver">
-                            <VisualState.Setters>
-                                <!--Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/-->
-                                <Setter Target="Root.Background" Value="Blue"/>
-                                <Setter Target="Root.BorderBrush" Value="Transparent"/>
-                            </VisualState.Setters>
-                            <Storyboard>
-                                <PointerUpThemeAnimation Storyboard.TargetName="Root" />
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <ContentPresenter/>
-            </Border>
-        </ControlTemplate>
+        <AcrylicBrush
+            x:Key="MainPageBackgroundBrush"
+            FallbackColor="{ThemeResource SystemChromeLowColor}"
+            TintOpacity="0.85"
+            TintTransitionDuration="00:00:00.8"
+            TintColor="{ThemeResource SystemAltMediumHighColor}"
+            TintLuminosityOpacity="0.75"
+            BackgroundSource="HostBackdrop"/>
+
+        <Color x:Key="ControlOuterBorderNormal">#33000000</Color>
+        <Color x:Key="ControlOuterBorderActive">#CC000000</Color>
+        <Color x:Key="ControlInnerBorderNormal">#11FFFFFF</Color>
+        <Color x:Key="ControlInnerBorderActive">#55FFFFFF</Color>
+
+        <Style x:Key="ContentControlStyle1" TargetType="ContentControl">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Border x:Name="OuterBorder" BorderThickness="1" Background="#22000000">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="OuterBorderBrush"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.400"
+                                                    To="{StaticResource ControlOuterBorderNormal}"/>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="InnerBorderBrush"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.400"
+                                                    To="{StaticResource ControlInnerBorderNormal}"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="OuterBorderBrush"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.250"
+                                                    To="{StaticResource ControlOuterBorderActive}"/>
+                                                <ColorAnimation
+                                                    Storyboard.TargetName="InnerBorderBrush"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.250"
+                                                    To="{StaticResource ControlInnerBorderActive}"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush x:Name="OuterBorderBrush" Color="{StaticResource ControlOuterBorderNormal}"/>
+                                </Border.BorderBrush>
+                                <Border x:Name="InnerBorder" BorderThickness="1">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush x:Name="InnerBorderBrush" Color="{StaticResource ControlInnerBorderNormal}"/>
+                                    </Border.BorderBrush>
+                                    <ContentPresenter Margin="8,8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>

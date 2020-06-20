@@ -7,12 +7,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Page.Resources>
-        <AcrylicBrush x:Name="BackgroundBrushNo1" FallbackColor="#FF272727" TintOpacity="0.85" TintTransitionDuration="00:00:00.8" TintColor="#C0272727" TintLuminosityOpacity="0.75" BackgroundSource="HostBackdrop"></AcrylicBrush>
-    </Page.Resources>
-    <Grid Background="{StaticResource BackgroundBrushNo1}">
-        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Top" Template="{StaticResource IpDisplayTemplate}" BorderThickness="2">
-            <TextBlock x:Name="textBlock" Text="External IP" Tapped="CopyIpTap" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="{ThemeResource ButtonPadding}" Foreground="White" />
+    <Grid Background="{StaticResource MainPageBackgroundBrush}">
+        <ContentControl Style="{StaticResource ContentControlStyle1}"
+                        VerticalAlignment="Top"
+                        Margin="10,10,10,10"
+                        PointerEntered="ContentControl_PointerEntered"
+                        PointerExited="ContentControl_PointerExited"
+                        Tapped="CopyIpTap">
+            <RelativePanel>
+                <TextBlock x:Name="copyIcon"
+                           Text="&#xE8C8;"
+                           FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                           Padding="4"/>
+                <TextBlock x:Name="textBlock"
+                           Text="External IP"
+                           RelativePanel.RightOf="copyIcon"
+                           Padding="4"/>
+            </RelativePanel>
         </ContentControl>
     </Grid>
 </Page>
